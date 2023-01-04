@@ -45,8 +45,6 @@ comm #.*
 
 
 
-
-
     
     return const_logique;}
 "+" {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
