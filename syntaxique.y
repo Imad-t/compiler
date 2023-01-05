@@ -9,16 +9,22 @@
  mc_while mc_for mc_in mc_range  saut_ligne comm
 
 %%
-S : LIST_INSTR
+S : LIST_INSTR {YYACCEPT;}
 ;
 LIST_INSTR : INST LIST_INSTR |
 ;
-INST : DEC | AFF | COND | BOUCLE  
+INST : DEC 
 ;
-DEC : TYPE idf sep_affectation 
+DEC : TYPE idf sep_affectation CST
+;
+TYPE : mc_int | mc_float | mc_char | mc_bool 
+;
+CST : cst_int cst_reel cst_reel const_logique
+;
 %%
 main()
 {
+     // INST : DEC | AFF | COND | BOUCLE  
      initialisation();
      yyparse();
      afficher();

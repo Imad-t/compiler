@@ -286,16 +286,16 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 #define YY_END_OF_BUFFER 44
 static yyconst short int yy_accept[94] =
     {   0,
-        0,    0,   44,    3,   29,    3,    3,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    1,    1,    3,
-        3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
-        3,    3,    3,    3,    3,    3,    3,    3,    0,   24,
-       28,    1,    0,    1,   25,   17,   26,   27,   27,   27,
-       27,   27,    0,    0,    0,    0,    0,    0,   36,   40,
-        0,   21,    0,    0,    0,    2,   27,   27,   27,   27,
-       22,    0,    0,    0,    0,   39,   32,   23,    0,    0,
-       30,   27,    4,   35,   34,   37,    0,    0,    0,   33,
-       41,   38,    0
+        0,    0,   44,   41,   28,   30,   41,   27,   10,   13,
+       14,    5,    4,   11,    6,   12,    7,    1,    1,   17,
+       18,   15,   19,   26,   26,   26,    8,    9,   41,   41,
+       41,   41,   41,   41,   41,   41,   41,   41,    0,   23,
+       27,    1,    0,    1,   24,   16,   25,   26,   26,   26,
+       26,   26,    0,    0,    0,    0,    0,    0,   35,   39,
+        0,   20,    0,    0,    0,    2,   26,   26,   26,   26,
+       21,    0,    0,    0,    0,   38,   31,   22,    0,    0,
+       29,   26,    3,   34,   33,   36,    0,    0,    0,   32,
+       40,   37,    0
 
     } ;
 
@@ -701,275 +701,277 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 33 "lexical.l"
-{
-    printf("\n '%s' => constante_char \n",yytext);
-    nb_colone += strlen(yytext);
-    rechercher(yytext, "cst_char", "CHAR",atoi(yytext),0);
-    return cst_char;
-    }
-	YY_BREAK
-case 4:
-YY_RULE_SETUP
-#line 39 "lexical.l"
+#line 34 "lexical.l"
 {
     printf("\n '%s' => constante_logique \n",yytext);
     nb_colone += strlen(yytext);
-    rechercher(yytext, "cst_logique", "Bool",yytext,0);
-    return const_logique;}
+    if(strcmp(yytext,"true") == 0){
+        rechercher(yytext, "cst_logique", "Bool",1.0,0);
+        return const_logique;}
+
+    if (strcmp(yytext,"false") ==0){
+        rechercher(yytext, "cst_logique", "Bool",0.0,0);
+        return const_logique;}
+    ;}
 	YY_BREAK
-case 5:
+case 4:
 YY_RULE_SETUP
-#line 44 "lexical.l"
+#line 45 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "addition", "",0,2);
 return sep_plus; }
 	YY_BREAK
-case 6:
+case 5:
 YY_RULE_SETUP
-#line 47 "lexical.l"
+#line 48 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "multiplication","",0,2); 
 return sep_multiplication; }
 	YY_BREAK
-case 7:
+case 6:
 YY_RULE_SETUP
-#line 50 "lexical.l"
+#line 51 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "soustraction", "",0 , 2);
 return sep_moins; }
 	YY_BREAK
-case 8:
+case 7:
 YY_RULE_SETUP
-#line 53 "lexical.l"
+#line 54 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "division", "",0,2); 
 return sep_devision; }
 	YY_BREAK
-case 9:
+case 8:
 YY_RULE_SETUP
-#line 56 "lexical.l"
+#line 57 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "crochet_ouvrant", "",0,2);
 return sep_crochet_ouvrant; }
 	YY_BREAK
-case 10:
+case 9:
 YY_RULE_SETUP
-#line 59 "lexical.l"
+#line 60 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "crochet_fermant", "",0,2);
 return sep_crochet_fermant; }
 	YY_BREAK
-case 11:
+case 10:
 YY_RULE_SETUP
-#line 62 "lexical.l"
+#line 63 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "quote", "",0,2); 
 return sep_quote; }
 	YY_BREAK
-case 12:
+case 11:
 YY_RULE_SETUP
-#line 65 "lexical.l"
+#line 66 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "virgule", "",0,2);
 return sep_virgule; }
 	YY_BREAK
-case 13:
+case 12:
 YY_RULE_SETUP
-#line 68 "lexical.l"
+#line 69 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "point", "",0,2);
 return sep_point; }
 	YY_BREAK
-case 14:
+case 13:
 YY_RULE_SETUP
-#line 71 "lexical.l"
+#line 72 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "parenthese_ouvrante", "",0,2);
 return sep_parenthese_ouvrante; }
 	YY_BREAK
-case 15:
+case 14:
 YY_RULE_SETUP
-#line 74 "lexical.l"
+#line 75 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "parenthese_fermante", "",0,2);
 return sep_parenthese_fermante; }
 	YY_BREAK
-case 16:
+case 15:
 YY_RULE_SETUP
-#line 77 "lexical.l"
+#line 78 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "affectaion", "",0,2);
 return sep_affectation;  }
 	YY_BREAK
-case 17:
+case 16:
 YY_RULE_SETUP
-#line 80 "lexical.l"
+#line 81 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "egalite", "",0,2);
 return sep_egale; }
 	YY_BREAK
-case 18:
+case 17:
 YY_RULE_SETUP
-#line 83 "lexical.l"
+#line 84 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "deux_points", "",0,2);
 return sep_deux_points;}
 	YY_BREAK
-case 19:
+case 18:
 YY_RULE_SETUP
-#line 86 "lexical.l"
+#line 87 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "inf", "",0,2);
 return sep_inf; }
 	YY_BREAK
-case 20:
+case 19:
 YY_RULE_SETUP
-#line 89 "lexical.l"
+#line 90 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "sup", "",0,2);
 return sep_sup; }
 	YY_BREAK
-case 21:
+case 20:
 YY_RULE_SETUP
-#line 92 "lexical.l"
+#line 93 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "or", "",0,2);
 return sep_or;}
 	YY_BREAK
-case 22:
+case 21:
 YY_RULE_SETUP
-#line 95 "lexical.l"
+#line 96 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "and", "",0,2);
 return sep_and;}
 	YY_BREAK
-case 23:
+case 22:
 YY_RULE_SETUP
-#line 98 "lexical.l"
+#line 99 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "not", "",0,2);
 return sep_not;}
 	YY_BREAK
-case 24:
+case 23:
 YY_RULE_SETUP
-#line 101 "lexical.l"
+#line 102 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "inegalite", "",0,2);
 return sep_not_equal; }
 	YY_BREAK
-case 25:
+case 24:
 YY_RULE_SETUP
-#line 104 "lexical.l"
+#line 105 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "inf_egal", "",0,2);
 return sep_inf_egal;}
 	YY_BREAK
-case 26:
+case 25:
 YY_RULE_SETUP
-#line 107 "lexical.l"
+#line 108 "lexical.l"
 {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "sup_egal", "",0,2);
 return sep_sup_rgal;}
 	YY_BREAK
-case 27:
+case 26:
 YY_RULE_SETUP
-#line 110 "lexical.l"
+#line 111 "lexical.l"
 {
     if (yyleng>8)printf("\n idf trop long\n");
     else{
-       // printf("this is before rechercher ta3 zmar ! \n\n");
-        
-        
-        nb_colone += strlen(yytext);
-        
-        //printf("\n'%s' ==> Identificateur\n ",yytext);
+        printf(" '%s' --> idf ",yytext);
+        nb_colone += strlen(yytext);        
         rechercher(yytext, "IDF","", 0, 0);
         return idf;
     }
-    }
+}
+	YY_BREAK
+case 27:
+YY_RULE_SETUP
+#line 120 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n %s  => Commentaire\n", yytext); return comm;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 123 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n %s  => Commentaire\n", yytext); return comm;}
+#line 121 "lexical.l"
+{ nb_ligne++;nb_colone=1;rechercher("\\n", "Saute", "",0,2); return saut_ligne;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 124 "lexical.l"
-{ nb_ligne++;nb_colone=1;rechercher("\\n", "Saute", "",0,2); return saut_ligne;}
+#line 122 "lexical.l"
+{nb_colone+=4; rechercher("\\t", "Tabulation", "", 0, 2); return tabulation;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 125 "lexical.l"
-{nb_colone+=4; rechercher("\\t", "Tabulation", "", 0, 2); return tabulation;}
+#line 123 "lexical.l"
+nb_colone++;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 126 "lexical.l"
-nb_colone++;
+#line 124 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n'%s' => mot_cle  \n",yytext);   rechercher(yytext, "MOT_CLE","",0,1);return mc_int;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 127 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n'%s' => mot_cle  \n",yytext);   rechercher(yytext, "MOT_CLE","",0,1);return mc_int;}
+#line 125 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n'%s' => mot_cle  \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_float;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 128 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n'%s' => mot_cle  \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_float;}
+#line 126 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n'%s'  => mot_cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_char;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 129 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n'%s'  => mot_cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_char;}
+#line 127 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n'%s'  => mot_cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_bool;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 130 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n'%s'  => mot_cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_bool;}
+#line 128 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n'%s' => mot cle    \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_if;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 131 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n'%s' => mot cle    \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_if;}
+#line 129 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n'%s' => mot cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_else;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 132 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n'%s' => mot cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_else;}
+#line 130 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n'%s' => mot cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_while;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 133 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n'%s' => mot cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_while;}
+#line 131 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n'%s' => mot cle    \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_for;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 134 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n'%s' => mot cle    \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_for;}
+#line 132 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n'%s' => mot_cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_in;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 135 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n'%s' => mot_cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_in;}
+#line 133 "lexical.l"
+{nb_colone += strlen(yytext); printf("\n'%s' => mot_cle \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_range;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 136 "lexical.l"
-{nb_colone += strlen(yytext); printf("\n'%s' => mot_cle \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_range;}
+#line 134 "lexical.l"
+{
+    printf("\n '%s' => constante_char \n",yytext);
+    nb_colone += strlen(yytext);
+    rechercher(yytext, "cst_char", "CHAR",atof(yytext),0);
+    return cst_char;
+}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 137 "lexical.l"
+#line 140 "lexical.l"
 {printf("*Erreur lexical \n Ligne :%d Colone:%d \n erreur dans : '%s'\n\n ", nb_ligne ,nb_colone, yytext);} 
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 138 "lexical.l"
+#line 141 "lexical.l"
 ECHO;
 	YY_BREAK
-#line 973 "lex.yy.c"
+#line 975 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1855,4 +1857,4 @@ int main()
 	return 0;
 	}
 #endif
-#line 138 "lexical.l"
+#line 141 "lexical.l"

@@ -89,7 +89,7 @@ int j,i;
 switch(y) 
   {
    case 0:
-   printf("HELLLLLLLLLO im in 0");
+   printf("HELLLLLLLLLO im in 0 -- idf cst \n");
 			/*Chercher si entite existe dans tab: si non on appelle la fonction inserer:
 			inserer(entite, code, type, val, y);*/
 		//printf("Rechercher idf cst\n");
@@ -111,7 +111,7 @@ switch(y)
         break;
 
    case 1:
-   printf("HELLLLLLLLLO im in 1");
+   printf("HELLLLLLLLLO im in 1 -- mot cle \n\n");
        //printf("Recherche mot cle, cptm=%d\n",cptm);
        /*Chercher si entite existe dans tabm: si non on appelle la fonction inserer*/
 	   if(cptm==0) inserer(entite,code,type,val,0,1); 
@@ -128,7 +128,7 @@ switch(y)
         break; 
     
    case 2:
-   printf("HELLLLLLLLLO im in 2");
+   printf("HELLLLLLLLLO im in 2 --- sep \n");
 			//printf("Rechercher séparateur\n");
          /*Chercher si entite existe dans tabs: si non on appelle la fonction inserer*/
 		if(cpts==0) inserer(entite,code,type,val,0,2); 
