@@ -1,0 +1,24 @@
+#comment
+A = 5
+float B
+int C,D
+E= 'E'
+F='f'
+G=5.66
+bool H
+char Tab[10]
+C=(1+ 2)(A - 6)
+D=C
+if((C>=D)or(7!=3)) :
+	E = 'e'
+else :
+	I=9
+for Cc in range(0,9):
+	J=2
+for Cc in Tab:
+	K=2
+while(2<1):
+	L=2
+
+
+

@@ -1,0 +1,6 @@
+A = True
+B= 1+2
+if(cond)
+	inst1
+	inst2
+

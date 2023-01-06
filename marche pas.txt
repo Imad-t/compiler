@@ -1,0 +1,4 @@
+declaration bool
+operateurs arithmitique doit avoir espace apres
+n'arrete pas quand il trouve un erreur lexical
+LIST_INST2

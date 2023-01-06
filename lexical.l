@@ -13,8 +13,8 @@ lettre [a-zA-Z0-9]
 chiffre [0-9]  
 cst_int (0|[+-]?[1-9]{chiffre}*)
 cst_reel {cst_int}\.{chiffre}+
-cst_char .
-const_logique (True|False)
+cst_char '[^\t]'
+cst_logique (True|False)
 idf {lettreMaj}({chiffre}|{lettre})*(_({chiffre}|{lettre}*))*
 comm #.*
 %%
@@ -30,22 +30,18 @@ comm #.*
     rechercher(yytext, "cst_reel", "FLOAT",atof(yytext),0);
     return cst_reel;
     }
-    {cst_char} {
-    printf("\n '%s' => constante_char \n",yytext);
-    nb_colone += strlen(yytext);
-    rechercher(yytext, "cst_char", "CHAR",atof(yytext),0);
-    return cst_char;
-    }
-{const_logique}  {
+
+{cst_logique}  {
     printf("\n '%s' => constante_logique \n",yytext);
     nb_colone += strlen(yytext);
-    if(yytext == 'TRUE')
+    if(strcmp(yytext,"true") == 0){
         rechercher(yytext, "cst_logique", "Bool",1.0,0);
-    else 
+        return cst_logique;}
 
-
-    
-    return const_logique;}
+    if (strcmp(yytext,"false") ==0){
+        rechercher(yytext, "cst_logique", "Bool",0.0,0);
+        return cst_logique;}
+    ;}
 "+" {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "addition", "",0,2);
 return sep_plus; }
@@ -64,7 +60,7 @@ return sep_crochet_ouvrant; }
 "]" {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
 rechercher(yytext, "crochet_fermant", "",0,2);
 return sep_crochet_fermant; }
-"'" {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
+"'" {nb_colone += strlen(yytext); 
 rechercher(yytext, "quote", "",0,2); 
 return sep_quote; }
 ","  {printf("\n '%s' => separateur \n",yytext);nb_colone += strlen(yytext); 
@@ -115,19 +111,15 @@ return sep_sup_rgal;}
 {idf} {
     if (yyleng>8)printf("\n idf trop long\n");
     else{
-       // printf("this is before rechercher ta3 zmar ! \n\n");
-        
-        
-        nb_colone += strlen(yytext);
-        
-        //printf("\n'%s' ==> Identificateur\n ",yytext);
+        printf(" '%s' --> idf ",yytext);
+        nb_colone += strlen(yytext);        
         rechercher(yytext, "IDF","", 0, 0);
         return idf;
     }
-    }
+}
 {comm} {nb_colone += strlen(yytext); printf("\n %s  => Commentaire\n", yytext); return comm;}
 \n { nb_ligne++;nb_colone=1;rechercher("\\n", "Saute", "",0,2); return saut_ligne;}
-"    " {nb_colone+=4; rechercher("\\t", "Tabulation", "", 0, 2); return tabulation;}
+\t {nb_colone+=4; rechercher("\\t", "Tabulation", "", 0, 2); return tabulation;}
 " " nb_colone++;
 int {nb_colone += strlen(yytext); printf("\n'%s' => mot_cle  \n",yytext);   rechercher(yytext, "MOT_CLE","",0,1);return mc_int;}
 float {nb_colone += strlen(yytext); printf("\n'%s' => mot_cle  \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_float;}
@@ -139,4 +131,10 @@ while {nb_colone += strlen(yytext); printf("\n'%s' => mot cle   \n",yytext); rec
 for {nb_colone += strlen(yytext); printf("\n'%s' => mot cle    \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_for;}
 in {nb_colone += strlen(yytext); printf("\n'%s' => mot_cle   \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_in;}
 range {nb_colone += strlen(yytext); printf("\n'%s' => mot_cle \n",yytext); rechercher(yytext, "MOT_CLE", "",0,1);return mc_range;}
-. {printf("*Erreur lexical \n Ligne :%d Colone:%d \n erreur dans : '%s'\n\n ", nb_ligne ,nb_colone, yytext);} 
+{cst_char} {
+    printf("\n '%s' => constante_char \n",yytext);
+    nb_colone += strlen(yytext);
+    rechercher(yytext, "cst_char", "CHAR",atof(yytext),0);
+    return cst_char;
+}
+. {printf("%d_%d_ erreur lexical %s n'appartient pas au langage\n",nb_ligne,nb_colone,yytext); nb_colone += strlen(yytext);}
